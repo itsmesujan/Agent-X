@@ -1,0 +1,131 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agent-x"
+version = "0.1.0"
+description = "Agent-X: Autonomous Mission Operating System"
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "Apache-2.0" }
+authors = [{ name = "Agent-X Engineering Team" }]
+dependencies = [
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.32.0",
+    "pydantic>=2.10.0",
+    "pydantic-settings>=2.6.0",
+    "google-genai>=0.1.1",
+    "google-cloud-firestore>=2.19.0",
+    "google-cloud-pubsub>=2.27.0",
+    "google-cloud-storage>=2.18.0",
+    "google-cloud-secret-manager>=2.20.0",
+    "opentelemetry-api>=1.28.0",
+    "opentelemetry-sdk>=1.28.0",
+    "opentelemetry-instrumentation-fastapi>=0.49b0",
+    "httpx>=0.28.0",
+    "python-multipart>=0.0.17",
+    "pyjwt>=2.10.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3.0",
+    "pytest-asyncio>=0.24.0",
+    "pytest-cov>=6.0.0",
+    "ruff>=0.8.0",
+    "mypy>=1.13.0",
+    "respx>=0.22.0",
+    "types-requests>=2.32.0",
+    "types-pyyaml>=6.0.12",
+]
+
+[tool.setuptools.packages.find]
+where = ["services/agent-x", "packages"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+exclude = ["docs", ".venv", "node_modules", ".next", "dist", "build"]
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "C",   # flake8-comprehensions
+    "B",   # flake8-bugbear
+    "UP",  # pyupgrade
+    "ASYNC", # flake8-async
+]
+ignore = [
+    "E501", # line length violations (handled by formatter)
+    "B008", # do not perform function calls in argument defaults (FastAPI Depends)
+]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 25
+
+[tool.ruff.lint.isort]
+known-first-party = ["agentx", "agentx_common"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = false
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+plugins = ["pydantic.mypy"]
+exclude = ["docs", ".venv", "node_modules", ".next", "dist", "build"]
+
+[[tool.mypy.overrides]]
+module = [
+    "google.*",
+    "google.cloud.*",
+]
+ignore_missing_imports = true
+
+[tool.pyright]
+include = ["services/agent-x", "packages/common", "tests"]
+extraPaths = ["services/agent-x", "packages/common"]
+pythonVersion = "3.12"
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+testpaths = ["tests", "services/agent-x/tests"]
+pythonpath = ["services/agent-x", "packages/common"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+addopts = "-v --strict-markers"
+markers = [
+    "unit: Unit tests",
+    "integration: Integration tests",
+    "benchmark: Performance benchmark tests",
+    "slow: Slow-running tests",
+]
+
+[tool.coverage.run]
+source = ["services/agent-x/agentx", "packages/common/agentx_common"]
+omit = ["tests/*", "**/__pycache__/*"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if TYPE_CHECKING:",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+]
+fail_under = 85

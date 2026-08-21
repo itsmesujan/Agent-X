@@ -1,0 +1,19 @@
+{
+  "scenario_id": "BENCH-01",
+  "name": "Cloud Security IAM Audit & Remediation",
+  "category": "CLOUD_SECURITY",
+  "objective": "Audit Cloud Run IAM permissions, identify over-privileged accounts, and synthesize a compliant Terraform patch.",
+  "target_environment": "synthetic_gcp_iam",
+  "injected_fault": "Missing resourcemanager.projects.getIamPolicy permission on default compute service account",
+  "timeout_seconds": 180,
+  "max_budget_usd": 0.50,
+  "expected_deliverables": [
+    "iam_remediation.tf",
+    "security_audit_report.json"
+  ],
+  "acceptance_tests": [
+    "test_terraform_validate_passes",
+    "test_no_roles_owner_granted",
+    "test_evidence_hash_valid"
+  ]
+}

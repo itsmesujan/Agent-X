@@ -1,0 +1,12 @@
+{
+  "include": [
+    "services/agent-x",
+    "packages/common",
+    "tests"
+  ],
+  "extraPaths": [
+    "services/agent-x",
+    "packages/common"
+  ],
+  "pythonVersion": "3.12"
+}

@@ -1,0 +1,7 @@
+# Example Terraform Variables for DEV Environment
+# Copy this file to terraform.tfvars and supply your GCP Project ID
+# DO NOT commit terraform.tfvars or sensitive secrets to Git
+
+project_id         = "agent-x-dev-12345"
+region             = "us-central1"
+notification_email = "dev-alerts@agentx.internal"
