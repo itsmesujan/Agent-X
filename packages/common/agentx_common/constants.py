@@ -17,3 +17,6 @@ class PUBSUB_TOPICS:
 class MODELS:
     REASONING_PRO = "gemini-2.5-pro"
     FAST_FLASH = "gemini-2.5-flash"
+    FAST_FLASH_THINKING = "gemini-2.5-flash-thinking"
+    FRONTIER_FLASH = "gemini-3.7-flash"
+    FRONTIER_PRO = "gemini-3.1-pro"

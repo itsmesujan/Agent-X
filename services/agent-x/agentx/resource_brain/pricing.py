@@ -9,7 +9,22 @@ PRICING_RATES: dict[ModelTier, dict[str, float]] = {
         "cached_per_token": 0.01875 / 1_000_000.0,
         "output_per_token": 0.30 / 1_000_000.0,
     },
+    ModelTier.GEMINI_2_5_FLASH_THINKING: {
+        "input_per_token": 0.075 / 1_000_000.0,
+        "cached_per_token": 0.01875 / 1_000_000.0,
+        "output_per_token": 0.30 / 1_000_000.0,
+    },
     ModelTier.GEMINI_2_5_PRO: {
+        "input_per_token": 1.25 / 1_000_000.0,
+        "cached_per_token": 0.3125 / 1_000_000.0,
+        "output_per_token": 5.00 / 1_000_000.0,
+    },
+    ModelTier.GEMINI_3_7_FLASH: {
+        "input_per_token": 0.075 / 1_000_000.0,
+        "cached_per_token": 0.01875 / 1_000_000.0,
+        "output_per_token": 0.30 / 1_000_000.0,
+    },
+    ModelTier.GEMINI_3_1_PRO: {
         "input_per_token": 1.25 / 1_000_000.0,
         "cached_per_token": 0.3125 / 1_000_000.0,
         "output_per_token": 5.00 / 1_000_000.0,

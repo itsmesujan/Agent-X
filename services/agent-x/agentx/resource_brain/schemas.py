@@ -15,6 +15,9 @@ class ModelTier(StrEnum):
 
     GEMINI_2_5_PRO = "gemini-2.5-pro"
     GEMINI_2_5_FLASH = "gemini-2.5-flash"
+    GEMINI_2_5_FLASH_THINKING = "gemini-2.5-flash-thinking"
+    GEMINI_3_7_FLASH = "gemini-3.7-flash"
+    GEMINI_3_1_PRO = "gemini-3.1-pro"
 
 
 class TaskComplexityEstimate(BaseModel):
